@@ -23,40 +23,6 @@ function App() {
 
     return fetchContacts;
   });
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const addContact = (newContact) => {
-    const newCont = {
-      id: nanoid(),
-      name: newContact.name,
-      number: newContact.phone,
-    };
-    console.log(newCont);
-    setContacts((prev) => {
-      return [...prev, newCont];
-    });
-  };
-
-  const list = (search) => {
-    if (search === "") {
-      return contacts;
-    }
-    return contacts.filter((el) => {
-      return el.name.toLowerCase().includes(search.toLowerCase());
-    });
-  };
-
-  const deleteContact = (id) => {
-    setContacts((prev) => {
-      return prev.filter((el) => {
-        return el.id !== id;
-      });
-    });
-  };
 
   useEffect(() => {
     localFunc.save("contacts", contacts);
@@ -65,9 +31,9 @@ function App() {
   return (
     <div className="container">
       <h1>Phonebook</h1>
-      <ContactForm addContact={addContact} contacts={contacts} />
-      <SearchBox search={search} handleSearch={handleSearch} />
-      <ContactList contacts={list(search)} deleteContact={deleteContact} />
+      <ContactForm />
+      <SearchBox />
+      <ContactList />
     </div>
   );
 }

@@ -1,7 +1,14 @@
 import s from "./Contact.module.css";
 import { IoMdPerson, IoMdCall } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 
-function Contact({ contact, deleteContact }) {
+function Contact({ contact }) {
+  const dispatch = useDispatch();
+  const handledeleteContact = (id) => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <div className={s.wrapper}>
       <div>
@@ -20,7 +27,7 @@ function Contact({ contact, deleteContact }) {
       </div>
       <button
         onClick={() => {
-          deleteContact(contact.id);
+          handledeleteContact(contact.id);
         }}
       >
         Delete
